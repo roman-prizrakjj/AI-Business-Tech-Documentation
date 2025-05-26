@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Техническая Инфографика: Цикл Выпуска AI-Продукта и Оценка Рентабельности</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8; 
+            color: #073B4C; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px; 
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px; 
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+                max-height: 420px;
+            }
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.07), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
+            padding: 28px;
+            margin-bottom: 32px;
+        }
+        h1, h2, h3, h4 {
+            color: #073B4C; 
+        }
+        .text-highlight { color: #118AB2; } 
+        .text-accent-1 { color: #FF6B6B; } 
+        .text-accent-2 { color: #FFD166; } 
+        .text-accent-3 { color: #06D6A0; } 
+
+        .flowchart-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #D1E5F0;
+            border-radius: 8px;
+            background-color: #F8FAFC;
+        }
+        .flowchart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #118AB2;
+            margin-bottom: 10px;
+        }
+        .flowchart-step {
+            background-color: #E0F2FE; 
+            border: 1px solid #118AB2; 
+            color: #073B4C;
+            padding: 10px 14px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .flowchart-step strong { color: #075985; }
+        .flowchart-step .description {
+            font-size: 0.75rem;
+            color: #4A5568;
+            margin-top: 4px;
+            text-align: left;
+            padding-left: 8px;
+        }
+
+
+        .flowchart-arrow {
+            font-size: 1.8rem;
+            color: #118AB2; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px 0;
+        }
+        .kpi-card {
+            background-color: #E0F2FE;
+            border-left: 5px solid #118AB2; 
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #073B4C; 
+        }
+        .kpi-label {
+            font-size: 0.85rem;
+            color: #118AB2; 
+            margin-top: 4px;
+        }
+        .kpi-description {
+            font-size: 0.7rem;
+            color: #4A5568;
+            margin-top: 2px;
+        }
+        .calculator-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #B0C4DE;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+        .calculator-button {
+            background-color: #118AB2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calculator-button:hover {
+            background-color: #073B4C;
+        }
+        .calculator-result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #E6FFFA; 
+            border: 1px solid #06D6A0;
+            border-radius: 6px;
+            text-align: left; 
+        }
+        .calculator-result p { margin-bottom: 8px; font-size: 0.95rem;}
+        .calculator-result strong { font-size: 1.1rem; color: #047857; } 
+        .calculator-result .roi-positive { color: #047857; } 
+        .calculator-result .roi-negative { color: #EF4444; } 
+        .rating-excellent { color: #059669; font-weight: bold; } 
+        .rating-standard { color: #F59E0B; font-weight: bold; } 
+        .rating-questionable { color: #EF4444; font-weight: bold; } 
+
+
+        .tab-button {
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #E0E7FF;
+            color: #3730A3;
+            border-radius: 6px 6px 0 0;
+            font-weight: 500;
+            border: 1px solid transparent;
+            border-bottom: 1px solid #C7D2FE;
+        }
+        .tab-button.active {
+            background-color: #FFFFFF;
+            color: #118AB2;
+            border-color: #C7D2FE;
+            border-bottom: 1px solid #FFFFFF;
+            font-weight: 600;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #C7D2FE;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            background-color: #FFFFFF;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        ul.custom-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #D1E5F0;
+        }
+        ul.custom-list li:last-child {
+            border-bottom: none;
+        }
+        ul.custom-list strong { color: #118AB2; }
+        .term-definition {
+            font-size: 0.8rem;
+            color: #4A5568;
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .detailed-explanation {
+            font-size: 0.85rem;
+            color: #2D3748;
+            background-color: #F9FAFB;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+    </style>
+    <!-- 
+        Infographic Narrative Plan (Technical Focus V5):
+        1.  Начальная точка: Инициация, Определение и Финансовая Оценка
+            1.1 Источники и Ключевые действия на старте (с расшифровкой)
+            1.2 Оценка стоимости и рентабельности проекта (Затраты, Выгоды, Метрики - с расшифровкой)
+            1.3 Интерактивный Калькулятор Рентабельности Автоматизации
+        2.  Цепочка движения: От идеи к готовому продукту (Детализация этапов с MLOps и Agile - с расшифровкой терминов и процессов)
+            2.1 Этап 1: Исследование и Проектирование (с расшифровкой EDA, PoC)
+            2.2 Этап 2: Разработка и Обучение Моделей (с расшифровкой Feature Engineering, метрик)
+            2.3 Этап 3: Тестирование и Обеспечение Качества (с расшифровкой видов тестирования, UAT)
+            2.4 Этап 4: Развертывание и Интеграция (MLOps) (с расшифровкой CI/CD, Docker, Canary/Blue-Green)
+            2.5 Этап 5: Мониторинг и Поддержка (с расшифровкой дрейфа)
+        3.  Конечная точка: Успешный выпуск и подтверждение рентабельности (с пояснениями)
+        4.  Ключевые сквозные аспекты (с пояснениями)
+
+        Color Palette Chosen: "Energetic & Playful" (adapted for professional/technical look)
+        - #118AB2 (Blue NCS) - Primary
+        - #06D6A0 (Caribbean Green) - Secondary / Positive Accent
+        - #FFD166 (Sunglow Yellow) - Warning / Highlight Accent
+        - #FF6B6B (Coral Red) - Critical / Cost Accent
+        - #073B4C (Midnight Green Eagle Green) - Text, Dark Elements
+        - Backgrounds: #FFFFFF (White for cards), #F0F4F8 (Light Gray for body)
+
+        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All charts are Chart.js (Canvas). Diagrams are HTML/CSS.
+    -->
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-gradient-to-r from-[#073B4C] to-[#118AB2] text-white py-12 px-4 text-center rounded-b-xl shadow-lg">
+        <div class="container mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold mb-3">Технический Цикл Выпуска AI-Продукта</h1>
+            <p class="text-md md:text-lg">Детальный анализ этапов, оценки стоимости и рентабельности.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="initial-point" class="card">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-center">1. Начальная Точка: Инициация, Определение и Финансовая Оценка</h2>
+            
+            <div class="mb-8 p-4 border border-dashed border-gray-300 rounded-lg">
+                <h3 class="text-xl font-semibold mb-3 text-highlight">1.1 Источники и Ключевые Действия на Старте</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-2">Источники Инициации:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                            <li><strong>Бизнес-потребность заказчика:</strong> Явно сформулированный запрос или проблема, которую необходимо решить.</li>
+                            <li><strong>Исследование и Идея:</strong> Результаты анализа рынка, технологических трендов, выявление новых возможностей.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-2">Ключевые Действия:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                            <li><strong>Определение целей и задач (Goal Definition):</strong> Четкое формулирование того, что должен делать продукт (функциональные цели) и какие бизнес-результаты ожидаются (бизнес-цели).</li>
+                            <li><strong>Сбор и анализ требований (Requirements Gathering):</strong> Детальное выяснение функциональных (что система делает) и нефункциональных (как система работает - производительность, безопасность, удобство) требований.</li>
+                            <li><strong>Определение критериев успеха:</strong> Измеримые показатели (KPIs), по которым будет оцениваться успех продукта, включая финансовые (например, ROI, экономия).</li>
+                            <li><strong>Формирование команды и определение ролей:</strong> Подбор специалистов (Data Scientists, ML Engineers, разработчики, менеджеры) и распределение ответственности.</li>
+                            <li><strong>Первичная оценка рисков:</strong> Идентификация потенциальных технических, проектных, финансовых и этических рисков.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-highlight text-center">1.2 Оценка Стоимости и Рентабельности Проекта</h3>
+                <div id="tabs-container" class="mb-6">
+                    <div class="flex border-b border-gray-300">
+                        <button class="tab-button active" onclick="openTab(event, 'costsTab')">Затраты (Costs)</button>
+                        <button class="tab-button" onclick="openTab(event, 'benefitsTab')">Выгоды/Доходы (Benefits)</button>
+                        <button class="tab-button" onclick="openTab(event, 'metricsTab')">Ключевые Метрики</button>
+                    </div>
+
+                    <div id="costsTab" class="tab-content active">
+                        <h4 class="text-lg font-semibold mb-3">Анализ Затрат</h4>
+                        <div class="grid md:grid-cols-2 gap-6 items-start">
+                            <div>
+                                <h5 class="text-md font-semibold mb-2 text-accent-1">Затраты на Разработку (Development Costs)</h5>
+                                <p class="text-xs text-gray-600 mb-2">Включают оплату труда команды (DS - Data Scientists, ML - Machine Learning Engineers, Dev - Developers), затраты на данные, ПО, ресурсы.</p>
+                                <div class="chart-container h-[280px] md:h-[320px]">
+                                    <canvas id="developmentCostsChart"></canvas>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1 text-center">Иллюстративное распределение затрат.</p>
+                            </div>
+                            <div>
+                                <h5 class="text-md font-semibold mb-2 text-accent-1">Операционные Затраты (Operational/Running Costs) - После Запуска</h5>
+                                <ul class="custom-list text-sm text-gray-700 space-y-1">
+                                    <li>Инфраструктура для продуктивной эксплуатации (серверы, облачные сервисы, хранилища).</li>
+                                    <li>Мониторинг и поддержка моделей (включая устранение "дрейфа моделей" - постепенного снижения качества предсказаний из-за изменения данных).</li>
+                                    <li>Техническая поддержка продукта для пользователей.</li>
+                                    <li>Лицензионные отчисления за используемое ПО или сервисы.</li>
+                                    <li>Обеспечение безопасности и соответствия нормативным требованиям (например, GDPR).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="benefitsTab" class="tab-content">
+                        <h4 class="text-lg font-semibold mb-3">Анализ Выгод и Доходов</h4>
+                        <ul class="custom-list text-sm text-gray-700 space-y-2">
+                            <li><strong>Прямая выручка:</strong> От продажи AI-продукта или услуг на его основе.</li>
+                            <li><strong>Экономия затрат:</strong> Сокращение ручного труда (оценивается в FTE - Full-Time Equivalent, эквивалент полной штатной единицы), снижение ошибок.</li>
+                            <li><strong>Повышение эффективности:</strong> Ускорение бизнес-процессов, увеличение пропускной способности.</li>
+                            <li><strong>Улучшение качества продуктов/услуг:</strong> Что ведет к повышению лояльности клиентов.</li>
+                            <li><strong>Новые возможности для бизнеса:</strong> Выход на новые рынки, создание инновационных предложений.</li>
+                            <li><strong>Снижение рисков:</strong> Например, в антифрод-системах или предиктивном обслуживании оборудования.</li>
+                        </ul>
+                    </div>
+
+                    <div id="metricsTab" class="tab-content">
+                        <h4 class="text-lg font-semibold mb-3">Ключевые Финансовые Метрики для Оценки</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="kpi-card p-3"><div class="kpi-value text-lg">ROI</div><div class="kpi-label text-xs">Return on Investment</div> <p class="kpi-description">Отношение прибыли к инвестициям.</p></div>
+                            <div class="kpi-card p-3"><div class="kpi-value text-lg">Payback</div><div class="kpi-label text-xs">Срок окупаемости</div> <p class="kpi-description">Время возврата инвестиций.</p></div>
+                            <div class="kpi-card p-3"><div class="kpi-value text-lg">NPV</div><div class="kpi-label text-xs">Net Present Value</div> <p class="kpi-description">Чистая текущая стоимость будущих денежных потоков.</p></div>
+                            <div class="kpi-card p-3"><div class="kpi-value text-lg">IRR</div><div class="kpi-label text-xs">Internal Rate of Return</div> <p class="kpi-description">Внутренняя норма доходности проекта.</p></div>
+                            <div class="kpi-card p-3"><div class="kpi-value text-lg">TCO</div><div class="kpi-label text-xs">Total Cost of Ownership</div> <p class="kpi-description">Общая стоимость владения продуктом за весь жизненный цикл.</p></div>
+                            <div class="kpi-card p-3"><div class="kpi-value text-lg">CBA</div><div class="kpi-label text-xs">Cost-Benefit Analysis</div> <p class="kpi-description">Сравнение всех затрат и выгод проекта.</p></div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-4"><strong>Результат этапа:</strong> Принятие решения "Go/No-Go" (запускать/не запускать проект), определение бюджета.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-highlight text-center">1.3 Калькулятор Рентабельности Автоматизации</h3>
+                <div class="max-w-lg mx-auto p-6 bg-gray-50 rounded-lg border border-gray-200">
+                    <p class="text-sm text-gray-600 mb-4">Оцените потенциальную рентабельность автоматизации.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="hoursSaved" class="block text-sm font-medium text-gray-700 mb-1">Часов экономится в неделю на сотрудника:</label>
+                            <input type="number" id="hoursSaved" class="calculator-input" placeholder="Например, 5">
+                        </div>
+                        <div>
+                            <label for="numEmployees" class="block text-sm font-medium text-gray-700 mb-1">Кол-во сотрудников:</label>
+                            <input type="number" id="numEmployees" class="calculator-input" placeholder="Например, 3" value="1">
+                        </div>
+                        <div>
+                            <label for="hourlyRate" class="block text-sm font-medium text-gray-700 mb-1">Средняя часовая ставка сотрудника:</label>
+                            <input type="number" id="hourlyRate" class="calculator-input" placeholder="Например, 1000">
+                        </div>
+                        <div>
+                            <label for="automationImpCost" class="block text-sm font-medium text-gray-700 mb-1">Стоимость внедрения автоматизации:</label>
+                            <input type="number" id="automationImpCost" class="calculator-input" placeholder="Например, 500000">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="monthlyMaintenanceCost" class="block text-sm font-medium text-gray-700 mb-1">Ежемесячные расходы на обслуживание автоматизации:</label>
+                            <input type="number" id="monthlyMaintenanceCost" class="calculator-input" placeholder="Например, 10000">
+                        </div>
+                    </div>
+                    <button onclick="calculateProfitability()" class="calculator-button w-full mt-4">Рассчитать</button>
+                    <div id="profitabilityResult" class="calculator-result mt-4" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process-chain" class="card">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-center">2. Цепочка Движения: От Идеи к Готовому Продукту</h2>
+            <p class="text-center text-gray-600 mb-6 text-sm">Этапы являются итеративными (Agile/Scrum). Финансовые показатели и бюджет регулярно пересматриваются.</p>
+
+            <div class="space-y-6">
+                <div class="flowchart-section">
+                    <h4 class="flowchart-title">Этап 1: Исследование и Проектирование (Research & Design)</h4>
+                    <div class="flowchart-step"><strong>Вход:</strong> Бизнес-потребность, Требования, Первичная оценка</div>
+                    <div class="flowchart-step">Сбор и подготовка данных (Data Collection & Preparation) <p class="description">Поиск, очистка, агрегация, разметка и трансформация данных для обучения моделей.</p></div>
+                    <div class="flowchart-step">Разведочный анализ данных (EDA - Exploratory Data Analysis) <p class="description">Визуализация и статистический анализ данных для выявления паттернов, аномалий и проверки гипотез.</p></div>
+                    <div class="flowchart-step">Выбор моделей и алгоритмов (Model Selection) <p class="description">Подбор подходящих AI/ML алгоритмов на основе задачи, данных и требований.</p></div>
+                    <div class="flowchart-step">Проектирование архитектуры системы <p class="description">Определение компонентов AI-системы, их взаимодействия, используемых технологий и инфраструктуры.</p></div>
+                    <div class="flowchart-step">Создание прототипа/PoC (Proof of Concept) <p class="description">Быстрая реализация базовой функциональности для проверки жизнеспособности идеи и демонстрации ключевых возможностей.</p></div>
+                    <div class="flowchart-arrow">⬇️</div>
+                    <div class="flowchart-step"><strong>Выход:</strong> Уточненная оценка, Техническое задание (ТЗ), Архитектура PoC</div>
+                </div>
+
+                <div class="flowchart-section">
+                    <h4 class="flowchart-title">Этап 2: Разработка и Обучение Моделей (Development & Model Training)</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flowchart-step"><strong>Вход:</strong> ТЗ, Архитектура PoC, Подготовленные данные</div>
+                            <div class="flowchart-arrow">⬇️</div>
+                            <div class="flowchart-step">Разработка признаков (Feature Engineering) 
+                                <p class="detailed-explanation"><strong>Feature Engineering</strong> – это процесс выбора, преобразования и создания наиболее информативных признаков (фич) из сырых данных, которые модель машинного обучения будет использовать для предсказаний. Качество признаков напрямую влияет на производительность модели. Включает методы: <br>
+                                - <i>Создание новых признаков:</i> Комбинирование существующих (например, отношение двух величин).<br>
+                                - <i>Трансформация:</i> Логарифмирование, масштабирование, нормализация.<br>
+                                - <i>Кодирование категориальных признаков:</i> One-hot encoding, label encoding.<br>
+                                - <i>Обработка пропусков:</i> Заполнение средним, медианой или более сложными методами.<br>
+                                - <i>Отбор признаков:</i> Выбор наиболее релевантных для уменьшения размерности и шума.</p>
+                            </div>
+                            <div class="flowchart-step">Обучение моделей (Model Training) - итеративно <p class="description">Процесс "тренировки" ML-алгоритма на подготовленных данных для выявления закономерностей и построения предсказательной модели.</p></div>
+                            <div class="flowchart-step">Оценка и валидация моделей (Evaluation & Validation) <p class="description">Проверка качества обученных моделей на отложенных данных (тестовый набор) с использованием различных метрик.</p></div>
+                            <div class="flowchart-step">Разработка компонентов системы (UI - User Interface, API - Application Programming Interface) <p class="description">Создание пользовательского интерфейса для взаимодействия с AI-системой и API для интеграции с другими системами.</p></div>
+                            <div class="flowchart-step"><strong>Agile/Scrum:</strong> Спринты, Демо, Ретроспективы <p class="description">Гибкая методология разработки, позволяющая итеративно улучшать продукт и адаптироваться к изменениям.</p></div>
+                            <div class="flowchart-arrow">⬇️</div>
+                            <div class="flowchart-step"><strong>Выход:</strong> Обученные модели, Компоненты системы, Результаты валидации</div>
+                        </div>
+                        <div>
+                            <h5 class="text-md font-semibold mb-2 text-center text-accent-3">Метрики Производительности Модели (Иллюстративно)</h5>
+                            <div class="chart-container h-[250px] md:h-[300px]">
+                                <canvas id="modelPerformanceChart"></canvas>
+                            </div>
+                             <p class="text-xs text-gray-500 mt-1 text-center"><strong>Accuracy:</strong> Доля правильных предсказаний. <strong>Recall:</strong> Способность модели находить все релевантные случаи. <strong>F1-Score:</strong> Гармоническое среднее точности и полноты. <strong>ROC AUC:</strong> Качество модели бинарной классификации.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flowchart-section">
+                    <h4 class="flowchart-title">Этап 3: Тестирование и Обеспечение Качества (Testing & QA)</h4>
+                     <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flowchart-step"><strong>Вход:</strong> Обученные модели, Компоненты системы</div>
+                            <div class="flowchart-arrow">⬇️</div>
+                            <div class="flowchart-step">Тестирование моделей <p class="description">Проверка производительности, устойчивости к различным данным, справедливости (fairness).</p></div>
+                            <div class="flowchart-step">Функциональное тестирование <p class="description">Проверка соответствия продукта заявленным функциональным требованиям.</p></div>
+                            <div class="flowchart-step">Интеграционное тестирование <p class="description">Проверка корректности взаимодействия всех компонентов системы между собой.</p></div>
+                            <div class="flowchart-step">Нагрузочное тестирование <p class="description">Оценка работоспособности системы под ожидаемой и пиковой нагрузкой.</p></div>
+                            <div class="flowchart-step">Тестирование безопасности <p class="description">Выявление уязвимостей и обеспечение защиты данных.</p></div>
+                            <div class="flowchart-step">Пользовательское приемочное тестирование (UAT - User Acceptance Testing) <p class="description">Проверка продукта конечными пользователями или заказчиком на соответствие их ожиданиям.</p></div>
+                            <div class="flowchart-arrow">⬇️</div>
+                            <div class="flowchart-step"><strong>Выход:</strong> Отчеты о тестировании, Подтверждение UAT, Готовность к развертыванию</div>
+                        </div>
+                        <div>
+                            <h5 class="text-md font-semibold mb-2 text-center text-accent-3">Основные Виды Тестирования</h5>
+                            <ul class="text-sm space-y-1 mt-2 p-3 bg-blue-50 rounded-md">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Модельное</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Функциональное</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Интеграционное</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Производительности</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Безопасности</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Приемочное (UAT)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flowchart-section">
+                    <h4 class="flowchart-title">Этап 4: Развертывание и Интеграция (Deployment & Integration) - с MLOps</h4>
+                     <p class="text-xs text-gray-600 mb-2"><strong>MLOps (Machine Learning Operations):</strong> Набор практик для надежного и эффективного развертывания и поддержки ML-систем в продакшене.</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                             <div class="flowchart-step"><strong>Вход:</strong> Протестированный продукт, Подтверждение UAT</div>
+                            <div class="flowchart-arrow">⬇️</div>
+                            <div class="flowchart-step">Подготовка инфраструктуры (Prod environment) <p class="description">Настройка серверов и сервисов для работы продукта в реальных условиях.</p></div>
+                            <div class="flowchart-step">Упаковка модели (Model Packaging - Docker, etc.) <p class="description">Подготовка модели и ее зависимостей к развертыванию, часто с использованием контейнеризации (например, Docker).</p></div>
+                            <div class="flowchart-step">Создание CI/CD пайплайнов (Continuous Integration/Continuous Delivery) <p class="description">Автоматизация процессов сборки, тестирования и развертывания моделей и приложения.</p></div>
+                            <div class="flowchart-step">Развертывание модели (Canary, Blue/Green) <p class="description">Стратегии выкатки новой версии продукта, минимизирующие риски (например, Canary - для малой группы пользователей, Blue/Green - с переключением между двумя идентичными средами).</p></div>
+                            <div class="flowchart-step">Интеграция с существующими системами Заказчика</div>
+                            <div class="flowchart-arrow">⬇️</div>
+                            <div class="flowchart-step"><strong>Выход:</strong> Развернутый продукт в Prod, Финальная оценка затрат</div>
+                        </div>
+                        <div class="p-3 bg-gray-100 rounded-md">
+                            <h5 class="text-md font-semibold mb-2 text-center text-accent-3">Пример CI/CD Пайплайна в MLOps</h5>
+                            <div class="text-xs space-y-1 text-center">
+                                <div class="p-1 bg-teal-100 border border-teal-300 rounded">Код (Модель + Приложение) -> Контроль версий (Git)</div>
+                                <div class="self-center">↓ (Автоматический триггер)</div>
+                                <div class="p-1 bg-teal-100 border border-teal-300 rounded">Сборка и Авто-Тесты (включая тесты модели)</div>
+                                <div class="self-center">↓</div>
+                                <div class="p-1 bg-teal-100 border border-teal-300 rounded">Упаковка (Контейнеризация Docker) -> Реестр артефактов</div>
+                                <div class="self-center">↓</div>
+                                <div class="p-1 bg-teal-100 border border-teal-300 rounded">Развертывание (Staging -> Prod) с выбранной стратегией</div>
+                                <div class="self-center">↓</div>
+                                <div class="p-1 bg-teal-100 border border-teal-300 rounded">Мониторинг и Сбор обратной связи</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flowchart-section">
+                    <h4 class="flowchart-title">Этап 5: Мониторинг и Поддержка (Monitoring & Maintenance)</h4>
+                     <div class="grid md:grid-cols-2 gap-6 items-start">
+                        <div>
+                            <div class="flowchart-step"><strong>Вход:</strong> Развернутый продукт в Prod</div>
+                            <div class="flowchart-arrow">⬇️</div>
+                            <div class="flowchart-step">Мониторинг производительности модели <p class="description">Отслеживание метрик (точность, дрейф концепта - изменение зависимостей в данных, дрейф данных - изменение распределения входных данных).</p></div>
+                            <div class="flowchart-step">Мониторинг инфраструктуры и приложения <p class="description">Контроль доступности, производительности и операционных затрат.</p></div>
+                            <div class="flowchart-step">Сбор обратной связи от пользователей</div>
+                            <div class="flowchart-step">Планирование и реализация переобучения моделей <p class="description">Регулярное или по триггеру обновление модели на свежих данных для поддержания качества.</p></div>
+                            <div class="flowchart-step">Техническая поддержка и исправление ошибок</div>
+                            <div class="flowchart-arrow">⬇️</div>
+                            <div class="flowchart-step"><strong>Выход:</strong> Стабильно работающий продукт, Отчеты, План улучшений</div>
+                        </div>
+                        <div>
+                             <h5 class="text-md font-semibold mb-2 text-center text-accent-3">Мониторинг Производительности Модели (Иллюстративно)</h5>
+                             <div class="chart-container h-[250px] md:h-[300px]">
+                                <canvas id="modelMonitoringChart"></canvas>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1 text-center">Показывает возможное падение точности (дрейф) и эффект от переобучения.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="final-point" class="card">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-center">3. Конечная Точка: Успешный Выпуск и Подтверждение Рентабельности</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-3 text-highlight">Ключевые Результаты Выпуска:</h3>
+                    <ul class="custom-list text-sm text-gray-700 space-y-1">
+                        <li>Продукт развернут в продуктивной среде и доступен пользователям.</li>
+                        <li>Успешное прохождение UAT, подтверждающее соответствие ожиданиям.</li>
+                        <li>Передача полной технической и пользовательской документации.</li>
+                        <li>Проведено обучение пользователей и команды поддержки заказчика (если необходимо).</li>
+                        <li>Активированы процессы непрерывного мониторинга и поддержки для обеспечения стабильности и качества.</li>
+                        <li>Формальное завершение этапа/проекта (подписание актов, закрытие задач).</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-3 text-highlight">Оценка Фактической Рентабельности:</h3>
+                    <p class="text-sm text-gray-600 mb-3">Сравнение достигнутых финансовых результатов (реальная экономия, полученная выручка) с первоначальными плановыми расчетами (ROI, срок окупаемости). Анализ отклонений и извлечение уроков.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="kpi-card">
+                            <div class="kpi-value" id="actualRoi">N/A</div>
+                            <div class="kpi-label">Фактический ROI</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value" id="plannedRoi">N/A</div>
+                            <div class="kpi-label">Плановый ROI</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-4"><strong>Далее:</strong> Сбор обратной связи для будущих улучшений, планирование новых итераций или версий продукта, переход в фазу долгосрочной эксплуатации и развития.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cross-cutting-aspects" class="card">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-center">4. Ключевые Сквозные Аспекты, Влияющие на Всю Цепочку</h2>
+            <p class="text-center text-gray-600 mb-6 text-sm">Эти элементы критически важны на каждом этапе жизненного цикла AI-продукта для обеспечения его успеха, соответствия требованиям и устойчивости.</p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                     <ul class="space-y-3">
+                        <li class="flex items-start p-3 bg-indigo-50 rounded-lg shadow-sm">
+                            <span class="text-xl mr-3 mt-1">🤝</span>
+                            <div><strong class="text-indigo-700">Управление заинтересованными сторонами (Stakeholder Management):</strong> Постоянное взаимодействие с заказчиком, пользователями, руководством и другими ключевыми лицами для согласования целей, управления ожиданиями и обеспечения поддержки.</div>
+                        </li>
+                        <li class="flex items-start p-3 bg-indigo-50 rounded-lg shadow-sm">
+                            <span class="text-xl mr-3 mt-1">📊</span>
+                            <div><strong class="text-indigo-700">Управление данными (Data Governance):</strong> Политики и процессы для обеспечения качества, безопасности, доступности, целостности и соответствия нормативным требованиям данных на всех этапах их жизненного цикла.</div>
+                        </li>
+                        <li class="flex items-start p-3 bg-indigo-50 rounded-lg shadow-sm">
+                            <span class="text-xl mr-3 mt-1">⚖️</span>
+                            <div><strong class="text-indigo-700">Этические соображения (Ethical Considerations):</strong> Проактивный анализ и митигация рисков, связанных с предвзятостью AI, справедливостью, прозрачностью, подотчетностью и потенциальным социальным влиянием.</div>
+                        </li>
+                         <li class="flex items-start p-3 bg-indigo-50 rounded-lg shadow-sm">
+                            <span class="text-xl mr-3 mt-1">📝</span>
+                            <div><strong class="text-indigo-700">Документирование (Documentation):</strong> Ведение актуальной технической (архитектура, API, модели), пользовательской (руководства) и проектной (планы, отчеты) документации.</div>
+                        </li>
+                        <li class="flex items-start p-3 bg-indigo-50 rounded-lg shadow-sm">
+                            <span class="text-xl mr-3 mt-1">💰</span>
+                            <div><strong class="text-indigo-700">Финансовый контроль и управление бюджетом:</strong> Постоянный мониторинг фактических затрат, их соответствия утвержденному бюджету, управление финансовыми рисками и своевременная корректировка планов.</div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-2 text-center text-highlight">Оценка Важности / Покрытия Сквозных Аспектов (Иллюстративно)</h4>
+                     <p class="text-xs text-gray-500 mt-1 mb-2 text-center">Диаграмма показывает относительную важность (или текущий уровень проработки) каждого аспекта в проекте.</p>
+                    <div class="chart-container h-[300px] md:h-[350px]">
+                        <canvas id="crossCuttingAspectsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 text-sm text-gray-500">
+        <p>&copy; <span id="currentYear"></span> Техническая инфографика по циклу выпуска AI-продукта. Все права защищены.</p>
+        <p>Создано с использованием Tailwind CSS и Chart.js. Иллюстративные данные.</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        function openTab(event, tabName) {
+            let i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.className += " active";
+        }
+
+        function calculateProfitability() {
+            const hoursSaved = parseFloat(document.getElementById('hoursSaved').value) || 0;
+            const numEmployees = parseFloat(document.getElementById('numEmployees').value) || 1; 
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+            const automationImpCost = parseFloat(document.getElementById('automationImpCost').value) || 0;
+            const monthlyMaintenanceCost = parseFloat(document.getElementById('monthlyMaintenanceCost').value) || 0;
+            
+            const weeksInYear = 52;
+            const monthsInYear = 12;
+
+            let errorMessage = '';
+            if (hoursSaved <= 0 && automationImpCost <= 0 && monthlyMaintenanceCost <= 0) {
+                 errorMessage += 'Пожалуйста, введите хотя бы одно значение для расчета (экономия часов или затраты). ';
+            }
+             if (numEmployees <=0 && hoursSaved > 0) { 
+                 errorMessage += 'Количество сотрудников должно быть больше 0, если указана экономия часов. ';
+            }
+            if (hourlyRate <= 0 && hoursSaved > 0) { 
+                 errorMessage += 'Часовая ставка должна быть больше 0, если указана экономия часов. ';
+            }
+
+            if (errorMessage) {
+                document.getElementById('profitabilityResult').innerHTML = `<p class="text-red-600">${errorMessage}</p>`;
+                document.getElementById('profitabilityResult').style.display = 'block';
+                return;
+            }
+
+            const annualTimeSavingsValue = hoursSaved * hourlyRate * numEmployees * weeksInYear;
+            const annualMaintenanceCostValue = monthlyMaintenanceCost * monthsInYear;
+            
+            const netAnnualBenefitFromTime = annualTimeSavingsValue - annualMaintenanceCostValue; 
+            const netOverallFirstYear = annualTimeSavingsValue - (automationImpCost + annualMaintenanceCostValue);
+
+            let roiText = 'N/A';
+            if (automationImpCost > 0 && netAnnualBenefitFromTime > 0) {
+                const roi = (netAnnualBenefitFromTime / automationImpCost) * 100; 
+                roiText = `<strong class="roi-positive">${roi.toFixed(1)}%</strong> (годовой, на основе стоимости внедрения и чистой экономии от времени после обслуживания)`;
+            } else if (automationImpCost > 0 && netAnnualBenefitFromTime <= 0) {
+                roiText = `<strong class="roi-negative">Отрицательный или нулевой</strong> (годовая экономия не покрывает обслуживание)`;
+            } else if (automationImpCost === 0 && netAnnualBenefitFromTime > 0) {
+                 roiText = '<strong class="roi-positive">Очень высокий / Быстрая окупаемость</strong> (нет затрат на внедрение, экономия превышает обслуживание)';
+            } else if (automationImpCost === 0 && netAnnualBenefitFromTime <= 0) {
+                 roiText = '<strong class="roi-negative">Затраты на обслуживание равны или превышают экономию</strong> (внедрение не учтено)';
+            }
+            
+            let paybackPeriodText = 'N/A';
+            let paybackRatingText = '';
+            let paybackRatingClass = '';
+            let paybackMonths = Infinity;
+
+
+            if (automationImpCost > 0 && netAnnualBenefitFromTime > 0) {
+                const paybackYears = automationImpCost / netAnnualBenefitFromTime;
+                paybackMonths = paybackYears * 12;
+                paybackPeriodText = `<strong class="roi-positive">${paybackYears.toFixed(1)} лет (${paybackMonths.toFixed(0)} мес.)</strong>`;
+            } else if (automationImpCost > 0 && netAnnualBenefitFromTime <= 0) {
+                paybackPeriodText = '<strong class="roi-negative">Не окупается</strong> (годовая экономия не покрывает обслуживание)';
+            } else if (automationImpCost === 0 && netAnnualBenefitFromTime > 0) {
+                 paybackPeriodText = '<strong class="roi-positive">Мгновенно</strong> (нет затрат на внедрение)';
+                 paybackMonths = 0; 
+            } else {
+                 paybackPeriodText = '<strong class="roi-negative">Неприменимо / Не окупается</strong>';
+            }
+
+            if (paybackMonths <= 6) {
+                paybackRatingText = 'Отлично';
+                paybackRatingClass = 'rating-excellent';
+            } else if (paybackMonths <= 9) {
+                paybackRatingText = 'Стандарт';
+                paybackRatingClass = 'rating-standard';
+            } else {
+                paybackRatingText = 'Сомнительно';
+                paybackRatingClass = 'rating-questionable';
+            }
+            if (paybackPeriodText === 'N/A' || paybackPeriodText.includes('Не окупается') || paybackPeriodText.includes('Неприменимо')) {
+                 paybackRatingText = '<span class="rating-questionable">Сомнительно</span>';
+            } else {
+                 paybackRatingText = `<span class="${paybackRatingClass}">${paybackRatingText}</span>`;
+            }
+
+
+            const resultDiv = document.getElementById('profitabilityResult');
+            resultDiv.innerHTML = `
+                <p>Примерная годовая экономия от времени (до вычета обслуживания): <strong>${annualTimeSavingsValue.toLocaleString('ru-RU')}</strong></p>
+                <p>Стоимость внедрения автоматизации: <strong>${automationImpCost.toLocaleString('ru-RU')}</strong></p>
+                <p>Годовые расходы на обслуживание: <strong>${annualMaintenanceCostValue.toLocaleString('ru-RU')}</strong></p>
+                <hr class="my-2 border-gray-300">
+                <p>Чистая годовая экономия (1-й год, с учетом внедрения и обслуживания): <strong class="${netOverallFirstYear >= 0 ? 'roi-positive' : 'roi-negative'}">${netOverallFirstYear.toLocaleString('ru-RU')}</strong></p>
+                <p>Чистая годовая экономия (последующие годы, только обслуживание): <strong class="${netAnnualBenefitFromTime >= 0 ? 'roi-positive' : 'roi-negative'}">${netAnnualBenefitFromTime.toLocaleString('ru-RU')}</strong></p>
+                <p class="mt-2">ROI: ${roiText}</p>
+                <p class="mt-2">Срок окупаемости (Payback Period): ${paybackPeriodText}</p>
+                <p class="mt-2">Рейтинг качества окупаемости: ${paybackRatingText}</p>
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { color: '#073B4C', font: { size: 11 }, boxWidth: 12, padding:10 } },
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    backgroundColor: '#073B4C', titleColor: '#FFFFFF', bodyColor: '#FFFFFF',
+                    borderColor: '#118AB2', borderWidth: 1, padding: 10,
+                    titleFont: { weight: 'bold'}, bodyFont: { size: 11 }
+                }
+            },
+            scales: {
+                x: { ticks: { color: '#073B4C', font: { size: 10 } }, grid: { display: false } },
+                y: { ticks: { color: '#073B4C', font: { size: 10 } }, grid: { color: '#E0E7FF', borderDash: [3, 3] } }
+            }
+        };
+
+        const commonPieDonutOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'right', labels: { color: '#073B4C', font: { size: 11 }, boxWidth: 12, padding: 12 } },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback,
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (Array.isArray(label)) label = label.join(' ');
+                            if (label) label += ': ';
+                            if (context.parsed !== null) label += context.parsed + '%';
+                            return label;
+                        }
+                    },
+                    backgroundColor: '#073B4C', titleColor: '#FFFFFF', bodyColor: '#FFFFFF',
+                }
+            }
+        };
+        
+        const devCostsCtx = document.getElementById('developmentCostsChart').getContext('2d');
+        new Chart(devCostsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    ['Оплата труда', 'команды (DS, ML, Dev)'], 
+                    ['Сбор, разметка,', 'подготовка данных'], 
+                    ['Инструменты и ПО', '(лицензии, облака)'], 
+                    ['Вычислительные ресурсы', '(обучение моделей)'], 
+                    ['Управление проектом', 'и админ. расходы']
+                ],
+                datasets: [{
+                    label: 'Затраты на разработку',
+                    data: [40, 25, 15, 15, 5], 
+                    backgroundColor: ['#118AB2', '#06D6A0', '#FFD166', '#FF6B6B', '#4ECDC4'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: commonPieDonutOptions
+        });
+
+        const modelPerfCtx = document.getElementById('modelPerformanceChart').getContext('2d');
+        new Chart(modelPerfCtx, {
+            type: 'bar',
+            data: {
+                labels: [['Точность', '(Accuracy)'], ['Полнота', '(Recall)'], ['F1-Score'], ['ROC AUC']],
+                datasets: [{
+                    label: 'Значение метрики (Целевое)',
+                    data: [0.92, 0.88, 0.90, 0.95], 
+                    backgroundColor: ['#118AB2', '#06D6A0', '#FFD166', '#457B9D'],
+                    borderRadius: 4,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {...commonChartOptions, scales: { ...commonChartOptions.scales, y: { ...commonChartOptions.scales.y, suggestedMax: 1}}}
+        });
+        
+        const modelMonCtx = document.getElementById('modelMonitoringChart').getContext('2d');
+        new Chart(modelMonCtx, {
+            type: 'line',
+            data: {
+                labels: ['Янв', 'Фев', 'Март', ['Апр', '(Дрейф)'], 'Май', ['Июнь', '(Переобуч.)'], 'Июль'],
+                datasets: [{
+                    label: 'Точность Модели',
+                    data: [0.92, 0.91, 0.90, 0.85, 0.86, 0.91, 0.92],
+                    borderColor: '#118AB2',
+                    backgroundColor: 'rgba(17, 138, 178, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#118AB2'
+                }]
+            },
+            options: {...commonChartOptions, scales: { ...commonChartOptions.scales, y: { ...commonChartOptions.scales.y, suggestedMin: 0.7, suggestedMax: 1}}}
+        });
+
+        const crossAspectsCtx = document.getElementById('crossCuttingAspectsChart').getContext('2d');
+        new Chart(crossAspectsCtx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    ['Управление', 'стейкхолдерами'], 
+                    ['Управление', 'данными (Gov)'], 
+                    ['Этические', 'аспекты'], 
+                    ['Документирование'], 
+                    ['Финансовый', 'контроль']
+                ],
+                datasets: [{
+                    label: 'Оценка важности / Уровень покрытия',
+                    data: [90, 95, 85, 80, 92], 
+                    backgroundColor: 'rgba(17, 138, 178, 0.2)',
+                    borderColor: '#118AB2',
+                    pointBackgroundColor: '#118AB2',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#118AB2'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback }, backgroundColor: '#073B4C' }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#D1E5F0' },
+                        grid: { color: '#D1E5F0' },
+                        pointLabels: { font: { size: 10 }, color: '#073B4C' },
+                        ticks: { backdropColor: 'transparent', color: '#073B4C', stepSize: 20 },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+        
+        document.getElementById('actualRoi').textContent = '85%'; 
+        document.getElementById('plannedRoi').textContent = '70%'; 
+
+    </script>
+</body>
+</html>
