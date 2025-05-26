@@ -5,7 +5,7 @@
 ### Полезные ссылки:
 
 * **Дашборд по теме:** [Посмотреть на Google Drive](https://drive.google.com/file/d/135cxTG43ZGSyWbWdRO3edWTAaJ6tgjaK/view?pli=1)
-* * **Путь к Истинной Компетентности :** [Перейти на сайт](https://ai-business-tech.vercel.app/)
+* **Путь к Истинной Компетентности :** [Перейти на сайт](https://ai-business-tech.vercel.app/)
 * **Инфографика "Технический Цикл Выпуска AI-Продукта":** [Перейти на сайт](https://theaiproduct.vercel.app/)
 
 
