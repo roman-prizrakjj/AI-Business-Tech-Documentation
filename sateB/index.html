@@ -111,15 +111,58 @@
             color: #4A5568;
             margin-top: 2px;
         }
-        .calculator-input {
-            width: 100%;
+        
+        /* Chat Calculator Styles */
+        .chat-calculator-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #F8FAFC;
+            border: 1px solid #D1E5F0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .chat-log {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #E0E7FF;
+            border-radius: 8px;
+            background-color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .chat-message.bot {
+            background-color: #E0F2FE;
+            color: #073B4C;
+            text-align: left;
+            margin-right: auto; /* Aligns to the left */
+            max-width: 80%;
+        }
+        .chat-message.user {
+            background-color: #118AB2;
+            color: #FFFFFF;
+            text-align: left; /* User messages also align left for consistency in this context */
+            margin-left: auto; /* Aligns to the right */
+            max-width: 80%;
+        }
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input {
+            flex-grow: 1;
             padding: 10px;
             border: 1px solid #B0C4DE;
             border-radius: 6px;
-            margin-bottom: 12px;
             font-size: 0.95rem;
         }
-        .calculator-button {
+        .chat-button {
             background-color: #118AB2;
             color: white;
             padding: 10px 20px;
@@ -127,22 +170,23 @@
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s;
+            border: none;
         }
-        .calculator-button:hover {
+        .chat-button:hover {
             background-color: #073B4C;
         }
-        .calculator-result {
-            margin-top: 15px;
+        .calculator-result-chat { /* Styles for displaying results within chat */
+            margin-top: 10px;
             padding: 15px;
             background-color: #E6FFFA; 
             border: 1px solid #06D6A0;
-            border-radius: 6px;
+            border-radius: 8px;
             text-align: left; 
         }
-        .calculator-result p { margin-bottom: 8px; font-size: 0.95rem;}
-        .calculator-result strong { font-size: 1.1rem; color: #047857; } 
-        .calculator-result .roi-positive { color: #047857; } 
-        .calculator-result .roi-negative { color: #EF4444; } 
+        .calculator-result-chat p { margin-bottom: 8px; font-size: 0.9rem;}
+        .calculator-result-chat strong { font-size: 1rem; color: #047857; } 
+        .calculator-result-chat .roi-positive { color: #047857; } 
+        .calculator-result-chat .roi-negative { color: #EF4444; } 
         .rating-excellent { color: #059669; font-weight: bold; } 
         .rating-standard { color: #F59E0B; font-weight: bold; } 
         .rating-questionable { color: #EF4444; font-weight: bold; } 
@@ -201,26 +245,10 @@
     </style>
     <!-- 
         Infographic Narrative Plan (Technical Focus V5):
-        1.  Начальная точка: Инициация, Определение и Финансовая Оценка
-            1.1 Источники и Ключевые действия на старте (с расшифровкой)
-            1.2 Оценка стоимости и рентабельности проекта (Затраты, Выгоды, Метрики - с расшифровкой)
-            1.3 Интерактивный Калькулятор Рентабельности Автоматизации
-        2.  Цепочка движения: От идеи к готовому продукту (Детализация этапов с MLOps и Agile - с расшифровкой терминов и процессов)
-            2.1 Этап 1: Исследование и Проектирование (с расшифровкой EDA, PoC)
-            2.2 Этап 2: Разработка и Обучение Моделей (с расшифровкой Feature Engineering, метрик)
-            2.3 Этап 3: Тестирование и Обеспечение Качества (с расшифровкой видов тестирования, UAT)
-            2.4 Этап 4: Развертывание и Интеграция (MLOps) (с расшифровкой CI/CD, Docker, Canary/Blue-Green)
-            2.5 Этап 5: Мониторинг и Поддержка (с расшифровкой дрейфа)
-        3.  Конечная точка: Успешный выпуск и подтверждение рентабельности (с пояснениями)
-        4.  Ключевые сквозные аспекты (с пояснениями)
+        ... (plan remains the same, calculator part will be implemented as chat) ...
 
         Color Palette Chosen: "Energetic & Playful" (adapted for professional/technical look)
-        - #118AB2 (Blue NCS) - Primary
-        - #06D6A0 (Caribbean Green) - Secondary / Positive Accent
-        - #FFD166 (Sunglow Yellow) - Warning / Highlight Accent
-        - #FF6B6B (Coral Red) - Critical / Cost Accent
-        - #073B4C (Midnight Green Eagle Green) - Text, Dark Elements
-        - Backgrounds: #FFFFFF (White for cards), #F0F4F8 (Light Gray for body)
+        ... (colors remain the same) ...
 
         Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All charts are Chart.js (Canvas). Diagrams are HTML/CSS.
     -->
@@ -322,34 +350,14 @@
                 </div>
             </div>
             
-            <div>
-                <h3 class="text-xl font-semibold mb-4 text-highlight text-center">1.3 Калькулятор Рентабельности Автоматизации</h3>
-                <div class="max-w-lg mx-auto p-6 bg-gray-50 rounded-lg border border-gray-200">
-                    <p class="text-sm text-gray-600 mb-4">Оцените потенциальную рентабельность автоматизации.</p>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="hoursSaved" class="block text-sm font-medium text-gray-700 mb-1">Часов экономится в неделю на сотрудника:</label>
-                            <input type="number" id="hoursSaved" class="calculator-input" placeholder="Например, 5">
+            <div> <h3 class="text-xl font-semibold mb-4 text-highlight text-center">1.3 Калькулятор Рентабельности Автоматизации (Чат-версия)</h3>
+                <div class="chat-calculator-container">
+                    <div id="chatLog" class="chat-log">
                         </div>
-                        <div>
-                            <label for="numEmployees" class="block text-sm font-medium text-gray-700 mb-1">Кол-во сотрудников:</label>
-                            <input type="number" id="numEmployees" class="calculator-input" placeholder="Например, 3" value="1">
-                        </div>
-                        <div>
-                            <label for="hourlyRate" class="block text-sm font-medium text-gray-700 mb-1">Средняя часовая ставка сотрудника:</label>
-                            <input type="number" id="hourlyRate" class="calculator-input" placeholder="Например, 1000">
-                        </div>
-                        <div>
-                            <label for="automationImpCost" class="block text-sm font-medium text-gray-700 mb-1">Стоимость внедрения автоматизации:</label>
-                            <input type="number" id="automationImpCost" class="calculator-input" placeholder="Например, 500000">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="monthlyMaintenanceCost" class="block text-sm font-medium text-gray-700 mb-1">Ежемесячные расходы на обслуживание автоматизации:</label>
-                            <input type="number" id="monthlyMaintenanceCost" class="calculator-input" placeholder="Например, 10000">
-                        </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="Введите ваш ответ...">
+                        <button id="sendChatButton" class="chat-button">Отправить</button>
                     </div>
-                    <button onclick="calculateProfitability()" class="calculator-button w-full mt-4">Рассчитать</button>
-                    <div id="profitabilityResult" class="calculator-result mt-4" style="display: none;"></div>
                 </div>
             </div>
         </section>
@@ -558,7 +566,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="text-center py-8 text-sm text-gray-500">
@@ -583,19 +590,79 @@
             event.currentTarget.className += " active";
         }
 
-        function calculateProfitability() {
-            const hoursSaved = parseFloat(document.getElementById('hoursSaved').value) || 0;
-            const numEmployees = parseFloat(document.getElementById('numEmployees').value) || 1; 
-            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
-            const automationImpCost = parseFloat(document.getElementById('automationImpCost').value) || 0;
-            const monthlyMaintenanceCost = parseFloat(document.getElementById('monthlyMaintenanceCost').value) || 0;
+        // --- Chat Calculator Logic ---
+        const chatLog = document.getElementById('chatLog');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatButton = document.getElementById('sendChatButton');
+
+        const questions = [
+            { key: 'hoursSaved', text: 'Сколько часов экономится в неделю на одного сотрудника благодаря автоматизации? (например, 5)' },
+            { key: 'numEmployees', text: 'Укажите количество сотрудников, которых затронет автоматизация. (например, 3)' },
+            { key: 'hourlyRate', text: 'Какова средняя часовая ставка сотрудника? (например, 1000)' },
+            { key: 'automationImpCost', text: 'Какова предполагаемая стоимость внедрения автоматизации? (например, 500000)' },
+            { key: 'monthlyMaintenanceCost', text: 'Каковы ежемесячные расходы на обслуживание этой автоматизации? (например, 10000)' }
+        ];
+        let currentQuestionIndex = 0;
+        const answers = {};
+
+        function addMessageToChat(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', sender);
+            // To render HTML content safely if needed, but for now, textContent is safer.
+            // If results need HTML, this part needs to be adjusted.
+            if (sender === 'results') { // Special class for results block
+                 messageDiv.classList.remove('bot'); // remove bot class if it is a result
+                 messageDiv.classList.add('calculator-result-chat');
+                 messageDiv.innerHTML = message; // Allow HTML for results
+            } else {
+                messageDiv.textContent = message;
+            }
+
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll to the latest message
+        }
+
+        function askQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                addMessageToChat(questions[currentQuestionIndex].text, 'bot');
+            } else {
+                // All questions answered, calculate and display results
+                calculateAndDisplayChatResults();
+            }
+        }
+
+        function handleChatInput() {
+            const userAnswer = chatInput.value.trim();
+            if (userAnswer === '' && currentQuestionIndex < questions.length) { // Don't allow empty answers for questions
+                addMessageToChat('Пожалуйста, введите значение.', 'bot');
+                return;
+            }
+            
+            if (currentQuestionIndex < questions.length) {
+                 addMessageToChat(userAnswer, 'user');
+                answers[questions[currentQuestionIndex].key] = parseFloat(userAnswer) || 0; // Store answer
+                currentQuestionIndex++;
+            }
+            
+            chatInput.value = ''; // Clear input field
+            askQuestion(); // Ask next question or calculate
+        }
+        
+        function calculateAndDisplayChatResults() {
+            addMessageToChat('Спасибо! Рассчитываю рентабельность...', 'bot');
+
+            const hoursSaved = answers.hoursSaved || 0;
+            const numEmployees = answers.numEmployees || 1;
+            const hourlyRate = answers.hourlyRate || 0;
+            const automationImpCost = answers.automationImpCost || 0;
+            const monthlyMaintenanceCost = answers.monthlyMaintenanceCost || 0;
             
             const weeksInYear = 52;
             const monthsInYear = 12;
 
             let errorMessage = '';
-            if (hoursSaved <= 0 && automationImpCost <= 0 && monthlyMaintenanceCost <= 0) {
-                 errorMessage += 'Пожалуйста, введите хотя бы одно значение для расчета (экономия часов или затраты). ';
+             if (hoursSaved <= 0 && automationImpCost <= 0 && monthlyMaintenanceCost <= 0) {
+                 errorMessage += 'Недостаточно данных для расчета. Введите хотя бы экономию часов или затраты. ';
             }
              if (numEmployees <=0 && hoursSaved > 0) { 
                  errorMessage += 'Количество сотрудников должно быть больше 0, если указана экономия часов. ';
@@ -605,8 +672,10 @@
             }
 
             if (errorMessage) {
-                document.getElementById('profitabilityResult').innerHTML = `<p class="text-red-600">${errorMessage}</p>`;
-                document.getElementById('profitabilityResult').style.display = 'block';
+                addMessageToChat(`<p class="text-red-600">${errorMessage}</p>`, 'results');
+                // Offer to restart
+                addMessageToChat('Хотите попробовать рассчитать снова? Введите "да" или "нет".', 'bot');
+                currentQuestionIndex = questions.length + 1; // Special state to check for restart
                 return;
             }
 
@@ -633,7 +702,6 @@
             let paybackRatingClass = '';
             let paybackMonths = Infinity;
 
-
             if (automationImpCost > 0 && netAnnualBenefitFromTime > 0) {
                 const paybackYears = automationImpCost / netAnnualBenefitFromTime;
                 paybackMonths = paybackYears * 12;
@@ -657,15 +725,14 @@
                 paybackRatingText = 'Сомнительно';
                 paybackRatingClass = 'rating-questionable';
             }
+
             if (paybackPeriodText === 'N/A' || paybackPeriodText.includes('Не окупается') || paybackPeriodText.includes('Неприменимо')) {
                  paybackRatingText = '<span class="rating-questionable">Сомнительно</span>';
             } else {
                  paybackRatingText = `<span class="${paybackRatingClass}">${paybackRatingText}</span>`;
             }
 
-
-            const resultDiv = document.getElementById('profitabilityResult');
-            resultDiv.innerHTML = `
+            const resultsHTML = `
                 <p>Примерная годовая экономия от времени (до вычета обслуживания): <strong>${annualTimeSavingsValue.toLocaleString('ru-RU')}</strong></p>
                 <p>Стоимость внедрения автоматизации: <strong>${automationImpCost.toLocaleString('ru-RU')}</strong></p>
                 <p>Годовые расходы на обслуживание: <strong>${annualMaintenanceCostValue.toLocaleString('ru-RU')}</strong></p>
@@ -676,8 +743,65 @@
                 <p class="mt-2">Срок окупаемости (Payback Period): ${paybackPeriodText}</p>
                 <p class="mt-2">Рейтинг качества окупаемости: ${paybackRatingText}</p>
             `;
-            resultDiv.style.display = 'block';
+            addMessageToChat(resultsHTML, 'results');
+            addMessageToChat('Расчет завершен. Хотите попробовать рассчитать снова? Введите "да" или "нет".', 'bot');
+            currentQuestionIndex = questions.length + 1; // Special state to check for restart
         }
+        
+        function restartChatCalculator() {
+            currentQuestionIndex = 0;
+            for (const key in answers) { // Clear previous answers
+                delete answers[key];
+            }
+            // Optional: Clear chat log or add a separator
+            // addMessageToChat("--- Новый расчет ---", "bot"); 
+            askQuestion();
+        }
+
+        sendChatButton.addEventListener('click', () => {
+            if (currentQuestionIndex === questions.length + 1) { // Check if it's the restart prompt
+                const decision = chatInput.value.trim().toLowerCase();
+                 addMessageToChat(chatInput.value.trim(), 'user');
+                if (decision === 'да') {
+                    restartChatCalculator();
+                } else if (decision === 'нет') {
+                    addMessageToChat('Хорошо. Если захотите рассчитать снова, просто напишите "да" на предыдущее предложение или обновите страницу.', 'bot');
+                } else {
+                     addMessageToChat('Не понял ответа. Пожалуйста, введите "да" или "нет".', 'bot');
+                }
+                chatInput.value = '';
+            } else {
+                handleChatInput();
+            }
+        });
+        chatInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent form submission if it were in a form
+                 if (currentQuestionIndex === questions.length + 1) { // Check if it's the restart prompt
+                    const decision = chatInput.value.trim().toLowerCase();
+                    addMessageToChat(chatInput.value.trim(), 'user');
+                    if (decision === 'да') {
+                        restartChatCalculator();
+                    } else if (decision === 'нет') {
+                        addMessageToChat('Хорошо. Если захотите рассчитать снова, просто напишите "да" на предыдущее предложение или обновите страницу.', 'bot');
+                    } else {
+                        addMessageToChat('Не понял ответа. Пожалуйста, введите "да" или "нет".', 'bot');
+                    }
+                    chatInput.value = '';
+                } else {
+                    handleChatInput();
+                }
+            }
+        });
+
+        // Start the chat
+        askQuestion();
+        // --- End of Chat Calculator Logic ---
+
+
+        // Original `calculateProfitability` function is no longer directly used by a button,
+        // its logic is now incorporated into `calculateAndDisplayChatResults`.
+        // function calculateProfitability() { ... } // Old function can be removed or commented out
 
         const tooltipTitleCallback = (tooltipItems) => {
             const item = tooltipItems[0];
