@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск Заказчиков на RPA-Проекты: Руководство</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* For smooth scrolling on navigation (if added later) */
+        }
+        .complexity-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px; /* full */
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .complexity-low { background-color: #DCFCE7; color: #166534; /* green-100, green-800 */ }
+        .complexity-low-medium { background-color: #FEF9C3; color: #854D0E; /* yellow-100, yellow-800 */ }
+        .complexity-medium { background-color: #FFEDD5; color: #9A3412; /* orange-100, orange-800 */ }
+        .complexity-medium-high { background-color: #FEE2E2; color: #991B1B; /* red-100, red-800 */ }
+        .complexity-high { background-color: #FECACA; color: #B91C1C; /* red-200, red-700 */ }
+        .complexity-very-high { background-color: #E11D48; color: #FFF1F2; /* rose-600, rose-50 */ }
+        .complexity-highest { background-color: #831843; color: #FCE7F3; /* fuchsia-800, fuchsia-50 */ }
+
+        /* Custom gradient for header */
+        .header-gradient {
+            background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); /* Dark blue to lighter blue */
+        }
+        .section-title-underline {
+            position: relative;
+            padding-bottom: 0.5rem; /* Space for the underline */
+        }
+        .section-title-underline::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 80px; /* Width of the underline */
+            height: 4px; /* Thickness of the underline */
+            background-color: #2563eb; /* Blue-600 */
+            border-radius: 2px;
+        }
+        .level-title-accent {
+            position: relative;
+            padding-left: 1.5rem; /* Space for the accent line */
+            border-left: 5px solid #2563eb; /* Blue-600 */
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 leading-relaxed">
+
+    <header class="header-gradient text-white py-12 sm:py-16 md:py-20 shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+                Поиск Заказчиков на RPA-Проекты
+            </h1>
+            <p class="mt-4 text-lg sm:text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+                Руководство по привлечению среднего и крупного бизнеса: от основ до продвинутых стратегий
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 md:p-8">
+
+        <section id="foundation" class="my-10 sm:my-12 md:my-16 bg-white p-6 sm:p-8 rounded-xl shadow-xl">
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 sm:mb-8 text-center section-title-underline">
+                Фундамент: Подготовка и Позиционирование
+            </h2>
+            <p class="text-center text-slate-600 mb-8 text-lg">Прежде чем переходить к каналам, помните о важности:</p>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-start">
+                    <svg class="w-6 h-6 text-blue-600 mr-3 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <strong>Качественного Портфолио:</strong>&nbsp;С измеримыми результатами и обезличенными кейсами (при NDA).
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-start">
+                    <svg class="w-6 h-6 text-blue-600 mr-3 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <strong>Четкого Уникального Торгового Предложения (УТП):</strong>&nbsp;Ваша специализация, преимущества.
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-start">
+                    <svg class="w-6 h-6 text-blue-600 mr-3 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <strong>Профессиональных Коммерческих Предложений и Презентаций.</strong>
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-start">
+                    <svg class="w-6 h-6 text-blue-600 mr-3 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <strong>Определения Целевой Аудитории</strong>&nbsp;внутри среднего и крупного бизнеса.
+                </li>
+            </ul>
+        </section>
+
+        <section id="channels" class="my-10 sm:my-12 md:my-16">
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-10 sm:mb-12 text-center section-title-underline">
+                Каналы Поиска Заказчиков: От Простого к Сложному
+            </h2>
+
+            <div class="mb-12 sm:mb-16">
+                <h3 class="text-2xl sm:text-3xl font-semibold text-slate-800 mb-6 sm:mb-8 level-title-accent">
+                    Уровень 1: Минимальные барьеры, опора на существующие связи и репутацию
+                </h3>
+                <div class="grid md:grid-cols-1 gap-6 sm:gap-8">
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">1. "Сарафанное радио" и Рекомендации</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Получение заказов через существующих довольных клиентов, коллег, партнеров, которые рекомендуют вас.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-low-medium">Низкая-Средняя</span>. Основная сложность – качественно выполнять работу, чтобы вас хотели рекомендовать.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Предоставлять отличный сервис, поддерживать хорошие отношения с клиентами, не стесняться просить рекомендации и отзывы после успешного завершения проектов.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Рекомендация от уважаемого лица или компании в их отрасли может быть очень весомой.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12 sm:mb-16">
+                <h3 class="text-2xl sm:text-3xl font-semibold text-slate-800 mb-6 sm:mb-8 level-title-accent">
+                    Уровень 2: Активное присутствие в цифровой среде, требующее времени и вовлеченности
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">2. Профильные Telegram-каналы и Чаты</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Участие в специализированных сообществах по RPA, BPM, автоматизации, бизнес-анализу, где могут обсуждаться проекты или потребности компаний.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-low-medium">Низкая-Средняя</span>. Требует регулярного мониторинга и умения грамотно себя подать.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Активно участвовать в дискуссиях, делиться экспертизой (не навязчиво), отслеживать запросы на услуги или специалистов.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Специалисты из этих компаний также могут состоять в таких чатах и искать подрядчиков для не очень крупных или пилотных задач.</p>
+                    </div>
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">3. Собственный Сайт/Лендинг + Базовое SEO</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Создание онлайн-визитки с описанием услуг, кейсов, контактов.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-medium">Средняя</span>. Требует начальных затрат (время или деньги) на создание и базовых знаний в SEO для привлечения органического трафика.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Разработать сайт, наполнить его качественным контентом, оптимизировать под ключевые запросы ("автоматизация процессов для [отрасль]", "RPA внедрение" и т.д.).</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Профессионально выглядящий сайт повышает доверие.</p>
+                    </div>
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">4. Профессиональные Социальные Сети (LinkedIn и аналоги)</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Построение профессионального имиджа, нетворкинг, демонстрация экспертизы через публикации.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-medium">Средняя</span>. Требует регулярной работы над контентом и выстраиванием сети контактов.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Создать и оптимизировать профиль, публиковать экспертные статьи, кейсы, участвовать в обсуждениях, добавлять в контакты ЛПР из интересующих компаний.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> LinkedIn (даже с учетом ограничений доступа из РФ, многие им пользуются через VPN) остается важным инструментом для поиска контактов на уровне топ-менеджмента и руководителей отделов.</p>
+                    </div>
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">5. Специализированные Платформы и Сообщества (Habr, VC.ru, Executive.ru)</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Публикация экспертных статей, кейсов, аналитических материалов для привлечения внимания целевой аудитории.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-medium">Средняя</span>. Требует умения создавать качественный и интересный контент.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Писать статьи, делиться опытом, участвовать в комментариях, демонстрируя глубокое понимание проблем автоматизации.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Руководители и специалисты часто читают такие ресурсы в поиске идей и решений.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12 sm:mb-16">
+                <h3 class="text-2xl sm:text-3xl font-semibold text-slate-800 mb-6 sm:mb-8 level-title-accent">
+                    Уровень 3: Проактивные действия, требующие инвестиций (время, деньги) и навыков продаж/переговоров
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">6. Партнерские Программы</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Сотрудничество с системными интеграторами, IT-компаниями, консалтинговыми фирмами, поставщиками ПО для автоматизации, которые могут передавать вам заказы на субподряд или рекомендовать клиентам.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-medium-high">Средняя-Высокая</span>. Требует поиска надежных партнеров и выстраивания взаимовыгодных отношений.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Определить потенциальных партнеров, подготовить предложение о сотрудничестве, провести переговоры.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Партнеры часто уже имеют выходы на крупных заказчиков.</p>
+                    </div>
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">7. Офлайн-Каналы и Нетворкинг (Конференции, выставки, бизнес-сообщества)</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Личное общение с потенциальными клиентами и партнерами на профильных мероприятиях.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-medium-high">Средняя-Высокая</span>. Требует затрат на участие/посещение и развитых коммуникативных навыков.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Выбирать релевантные мероприятия (по автоматизации, цифровой трансформации, отраслевые), активно знакомиться, обмениваться контактами, назначать последующие встречи.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> На таких мероприятиях можно встретить ЛПР и обсудить потребности их компаний.</p>
+                    </div>
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">8. Email-Маркетинг (Целевой) и Прямые Контакты ("Холодные")</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Адресное обращение к тщательно отобранным потенциальным клиентам.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-high">Высокая</span>. Низкая конверсия при неправильном подходе, требует серьезной подготовки и персонализации.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Глубоко исследовать компании, выявлять ЛПР, составлять персонализированные письма или сценарии звонков, фокусируясь на решении их потенциальных проблем.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Важно обращаться к правильным людям с релевантным предложением.</p>
+                    </div>
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">9. Контекстная Реклама (Яндекс.Директ и аналоги)</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Привлечение целевого трафика на ваш сайт или лендинг через платные объявления в поисковых системах.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-high">Высокая</span>. Требует бюджета, знаний в настройке рекламных кампаний, аналитике и постоянной оптимизации.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Определить бюджет, подобрать ключевые слова, создать объявления, настроить таргетинг, анализировать эффективность.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Может быть эффективно, если хорошо настроен таргетинг на лиц, ищущих решения по автоматизации для своих компаний.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12 sm:mb-16">
+                <h3 class="text-2xl sm:text-3xl font-semibold text-slate-800 mb-6 sm:mb-8 level-title-accent">
+                    Уровень 4: Стратегические и ресурсоемкие каналы с высоким потенциалом
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                     <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">10. Участие в Инновационных Площадках (Инкубаторы, Акселераторы типа Сколково, СберУнити)</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Интеграция в экосистемы, поддерживающие инновации, для получения доступа к ресурсам, менторству и потенциальным корпоративным клиентам.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-high">Высокая</span>. Конкурсный отбор, необходимость соответствовать критериям программ, часто требуется инновационная составляющая в предлагаемых решениях.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Мониторить наборы в акселераторы и инкубаторы, подавать заявки, готовить питчи, активно участвовать в программах, если прошли отбор.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Корпорации часто используют эти площадки для поиска подрядчиков и пилотирования новых технологий.</p>
+                    </div>
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover">
+                        <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">11. Тендерные Площадки (Коммерческие)</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Участие в конкурсах на выполнение работ/оказание услуг, объявляемых коммерческими организациями.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-very-high">Очень Высокая</span>. Требует умения работать с тендерной документацией, понимания процесса торгов, готовности к ценовой конкуренции и соблюдению формальных процедур.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Регистрация на площадках (B2B-Center, Fabrikant и др.), мониторинг закупок, анализ требований, подготовка конкурентоспособных заявок.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса:</strong> Это один из стандартных способов закупки услуг для многих крупных компаний.</p>
+                    </div>
+                    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 card-hover col-span-1 md:col-span-2"> <h4 class="text-xl sm:text-2xl font-bold text-blue-700 mb-4">12. Госзакупки (zakupki.gov.ru)</h4>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Суть:</strong> Участие в закупках государственных и окологосударственных компаний в рамках федеральных законов (44-ФЗ, 223-ФЗ).</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Сложность:</strong> <span class="complexity-badge complexity-highest">Наивысшая</span>. Требует глубокого знания законодательства, безукоризненной подготовки документации, наличия электронной подписи, часто – обеспечения заявки и контракта. Высокая конкуренция и строгий контроль.</p>
+                        <p class="mb-3"><strong class="font-semibold text-slate-700">Действия:</strong> Изучение законодательства, аккредитация на электронных торговых площадках, тщательная подготовка заявок, готовность к длительным процедурам и строгому исполнению контракта.</p>
+                        <p><strong class="font-semibold text-slate-700">Для среднего/крупного бизнеса (государственного сектора):</strong> Основной, а часто и единственный, способ получить контракт.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="specifics" class="my-10 sm:my-12 md:my-16 bg-white p-6 sm:p-8 rounded-xl shadow-xl">
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 sm:mb-8 text-center section-title-underline">
+                Особенности Работы со Средним и Крупным Бизнесом в РФ
+            </h2>
+            <p class="text-center text-slate-600 mb-8 text-lg">(Актуально для всех уровней сложности)</p>
+            <ul class="list-none space-y-4 text-lg">
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-center">
+                    <svg class="w-5 h-5 text-amber-500 mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                    Длинный Цикл Продаж.
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-center">
+                    <svg class="w-5 h-5 text-amber-500 mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                    Множество ЛПР (Лиц, Принимающих Решения).
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-center">
+                     <svg class="w-5 h-5 text-amber-500 mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 002.166 5.026V15a2 2 0 002 2h11.668a2 2 0 002-2V5.026A11.954 11.954 0 0010 1.944zM8.5 6a1.5 1.5 0 113 0v2.944a2 2 0 01-3 0V6zm5 6.5H6.5V16h7v-3.5z" clip-rule="evenodd"></path></svg>
+                    Высокие Требования к Безопасности и Compliance.
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-center">
+                    <svg class="w-5 h-5 text-amber-500 mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 5a1 1 0 100-2 1 1 0 000 2zM0 8a1 1 0 011-1h14a1 1 0 110 2H1a1 1 0 01-1-1zm0 5a1 1 0 011-1h7a1 1 0 110 2H1a1 1 0 01-1-1z"></path><path d="M17.293 9.293a1 1 0 011.414 0l2 2a1 1 0 01-1.414 1.414L17 10.414l-2.293 2.293a1 1 0 01-1.414-1.414l2-2z"></path></svg>
+                    Необходимость Интеграции с Существующими Системами.
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-center">
+                    <svg class="w-5 h-5 text-amber-500 mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.05 3.636a1 1 0 011.414 0L10 7.172l3.536-3.536a1 1 0 111.414 1.414L11.414 8.586l3.536 3.535a1 1 0 11-1.414 1.415L10 9.999l-3.536 3.536a1 1 0 11-1.414-1.414L8.586 8.586 5.05 5.051a1 1 0 010-1.415z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2a10 10 0 100-20 10 10 0 000 20z" clip-rule="evenodd"></path></svg>
+                    Требования к Масштабируемости Решений.
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-center">
+                    <svg class="w-5 h-5 text-amber-500 mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
+                    Высокие Требования к Документации.
+                </li>
+                <li class="bg-slate-50 p-4 rounded-lg shadow flex items-center">
+                    <svg class="w-5 h-5 text-amber-500 mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v11a1 1 0 100 2h14a1 1 0 100-2V5a1 1 0 100-2H3zm2.707 3.707a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L10 9.586 5.707 6.707z" clip-rule="evenodd"></path></svg>
+                    Актуальность Импортозамещения и Локализации.
+                </li>
+                 <li class="bg-slate-50 p-4 rounded-lg shadow flex items-center">
+                    <svg class="w-5 h-5 text-amber-500 mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v5.586L6.293 7.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L11 10.586V5z" clip-rule="evenodd"></path></svg>
+                    Сильный Фокус на Эффективности и Оптимизации.
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="mt-12 sm:mt-16 md:mt-20 py-8 sm:py-10 bg-slate-800 text-slate-300 text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="mb-4 text-lg">Эта структура от простого к сложному поможет вам выстроить стратегию поиска клиентов поэтапно, начиная с менее ресурсозатратных методов и постепенно осваивая более сложные по мере роста вашей экспертизы и ресурсов.</p>
+            <p class="font-semibold text-xl text-blue-400">Удачи!</p>
+            <p class="mt-6 text-sm text-slate-400">&copy; <span id="currentYear"></span> Руководство по Поиску Клиентов. Все права защищены (образно).</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
